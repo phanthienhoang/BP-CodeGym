@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let inputVatLy = prompt("nhập điểm VatLy")
+        let inputHoaHoc = prompt("nhập điểm HoaHoc")
+        let inputSinhHoc = prompt("nhập điểm SinhHoc")
+        let VatLy = parseInt(inputVatLy);
+        let HoaHoc = parseInt(inputHoaHoc);
+        let SinhHoc = parseInt(inputSinhHoc);
+        let TBC = ((VatLy + HoaHoc + SinhHoc)/3);
+        document.write("điểm TBC: " + TBC);
+    </script>
+    
+</body>
+</html>
