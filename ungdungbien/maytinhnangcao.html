@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <form>
+                Caculator <br/> <input type="text" number1="firstname" id="a"/>
+                <input type="text" number2="firstname" id="b"/>
+                <br/><button type="button"onclick="phepcong()">Addition(+)</button>
+                <button type="button"onclick="pheptru()">Subtraction(-)</button>
+                <button type="button"onclick="phepnhan()">Multipcation(X)</button>
+                <button type="button"onclick="phepchia()">Division(/)</button>
+            </form>
+                <script>
+                    function phepcong() phepchia() pheptru() phepnhan(){
+                        let number1 = document.getElementById('a').value
+                        let number2 = document.getElementById('b').value
+                        let a = parseInt(number1);
+                        let b = parseInt(number2);
+                        let result = a + b;
+                        let result = a / b;
+                        let result = a - b;
+                        let result = a * b;
+                        alert(result);
+                    }
+            
+                </script>
+            
+    
+</body>
+</html>
