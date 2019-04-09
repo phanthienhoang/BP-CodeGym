@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>TỪ ĐIỂN</h2>
+    <input type="text" id="tudien">
+    <button onclick="search()" id="search">search</button>
+    <script>
+        let english = ["hello", "what", "love"];
+        let tiengViet = ["xin chào", "cái gì", "yêu thích"];
+        function search() {
+           let a=  document.getElementById("tudien").value;
+            for( var i in english){
+                if(a==english[i]){
+                    alert(tiengViet[i]);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
