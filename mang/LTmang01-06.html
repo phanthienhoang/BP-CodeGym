@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body> 
+    <script>
+        let array = [];
+        for(let i=0;i<10;i++) {
+            let a=prompt("nhập số khởi tạo mảng: " );
+            array.push(a)
+        }
+        document.write("mảng : [" + array + "]" +"<br>");
+        let x = prompt("nhập số nguyên cần kiểm tra: ")
+        for(let j = 0;j < array.length;j++) {
+            if(x==array[j]) {
+                document.write( x + " là số thuộc mảng" +"<br>");
+                break;
+            }
+               
+        }
+        document.write( x + " là số không thuộc mảng");
+
+    </script>
+</body>
+</html>

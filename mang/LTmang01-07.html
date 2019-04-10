@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+          let array = [];
+          for(let i=0;i<3;i++) {
+              let a = prompt("nhập số khởi tạo mảng: ")
+              array.push(a);
+          }
+          document.write("mảng : [" + array + "]" +"<br>");
+          let x = prompt("nhập số kiểm tra: ");
+          for(let j=0;j<array.length;j++) {
+              if(x==array[j]) {
+                array.splice(j,1);
+                array.push(0);
+              }
+          }
+          document.write(array);
+
+    </script>
+    
+</body>
+</html>

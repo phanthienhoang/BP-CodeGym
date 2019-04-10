@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>những số lớn hơn 10 là:</h3>
+    <p id="demo"></p>
+    <h3>tổng các số lớn hơn 10 là:</h3>
+    <p id="demo2"></p>
+    <h3>có bao nhiêu số:</h3>
+    <p id="demo3"></p>
+    <script> 
+         let array = [5,12,8,9,21,30,6,18,0,35];
+         let text = "";
+         let tong = 0;
+         let dem = 0
+         for(let i = 0;i < array.length;i++) {
+             if(array[i] > 10) {
+                 text += array[i]+','
+                 tong += Number(array[i]) 
+                 dem += 1            
+             }
+         }
+         
+         document.getElementById("demo").innerHTML= text;
+         document.getElementById("demo2").innerHTML= tong;
+         document.getElementById("demo3").innerHTML= dem;
+
+    </script>
+    
+</body>
+</html>
