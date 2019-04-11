@@ -15,12 +15,15 @@
           }
           document.write("mảng : [" + array + "]" +"<br>");
           let x = prompt("nhập số kiểm tra: ");
-          for(let j=0;j<array.length;j++) {
+          let j = 0;
+          while(j<array.length) {
               if(x==array[j]) {
                 array.splice(j,1);
-                array.push(0);
+              }else{
+                  j++
               }
           }
+          array.push(0);
           document.write(array);
 
     </script>
