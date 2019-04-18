@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="button" id="on" value="On" onclick="a.switchOn();">    
+        <input type="button" id="off" value="Off" onclick="a.switchOff();">     
+    </div>
+    <script>
+        class bongden{
+            constructor(_status){
+                this.status = _status;
+            }
+            turnOn(){
+                this.status == true;
+                alert("đèn sáng")
+                console.log("LedOff");
+            }
+            turnOff(){
+                this.status == false;
+                alert("đèn tắt")
+                console.log("LedOn");
+            }
+        } 
+
+
+        class SwitchButton{
+            constructor(_status, _lamp){
+                this.status = _status;
+                this.lamp = _lamp;
+            }
+            switchOn(){
+                this.status == true;
+                console.log("turnOn");
+                this.lamp.turnOn();
+            }
+            switchOff(){
+                this.status == false;
+                console.log("turnOff");
+                this.lamp.turnOff();
+            }
+        }
+        let lamp = new bongden(false);
+        let a = new SwitchButton(false,lamp);
+
+    </script>
+</body>
+</html>
