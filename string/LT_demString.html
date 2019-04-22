@@ -8,14 +8,24 @@
 </head>
 <body>
     <script>
-        function kiemtra(str){
-            let dem = 0;
-            for(let i=0;i<str.lenght;i++){
-                dem += 1;  
+        function kiemtra(str) {
+                let count = 0;
+                let isSpace = false;
+                for (i = 0; i < str.length; i++) {
+                if (i == 0 && str[i] != ' ' && str[i] != '\t') {
+                    count++;
+                }
+                if (str[i] == ' ' || str[i] == '\t') {
+                    isSpace = true;
+                }
+                else if (isSpace) {
+                    count++;
+                    isSpace = false;
+                }
             }
-            return dem;
+            return count;
         }
-        let text = "anbdajcwaksa"
+        let text = "phan thiên hoàng"
         alert(kiemtra(text))
     </script>
 </body>
