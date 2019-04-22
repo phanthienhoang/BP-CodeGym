@@ -70,13 +70,13 @@
                 return "ngon"
             }
             CatEat() {
-                Cat.weight = Cat.weight + Rat.weight
-                return Cat.weight ;
+                this.weight = this.weight + Rat.weight
+                return this.weight ;
             }
            
 
         }
-        var chuot = new Rat("jerry", 2, 30, true);
+        var chuot = new Rat("jerry", 3, 30, true);
         document.getElementById("chuot").innerHTML= "tên " + chuot.RatName() + "<br>"+ " tốc độ " + chuot.RatSpeed()
         document.getElementById("khoiluong2").innerHTML = "khối lượng " + chuot.RatWeight()
         var meo = new Cat("tom", 15, 50);
@@ -85,7 +85,7 @@
         document.getElementById("khoiluong1").innerHTML = "khối lượng" + meo.CatWeight()
         function catchRat() {
             if (meo.speed >chuot.speed) {
-                return console.log( meo.weight += chuot.weight);                        
+                return alert( meo.weight += chuot.weight);                        
             }
         }   
 

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        function soNguyen(n){
+            this.n = n;
+            this.array = [];
+            this.mangchua =[];
+            this.mangchua2 =[];
+            this.mangchua3 = [];
+            this.mangchua4 = [];
+            this.khoitaomang = function() {
+                for(let i=0;i<n;i++){
+                    let a = prompt("nhập số khởi tạo mảng");
+                    this.array.push(a);                   
+                };
+            };
+            this.inMang = function(a,b){
+                document.write("mảng:" + this.array +"<br>");
+                for(let j=0;j<this.array.length;j++){
+                    if(this.array[j]%a==0 && this.array[j]%b==0){
+                        this.mangchua.push(this.array[j]);
+                    }
+                    if(this.array[j]%a==0){
+                        this.mangchua2.push(this.array[j]);
+                    }
+                    if(this.array[j]%b==0){
+                        this.mangchua3.push(this.array[j]);
+                    }
+                    if(this.array[j]%a!=0 && this.array[j]%b!=0){
+                        this.mangchua4.push(this.array[j]);
+                    }
+                }
+                document.write("các số chia hết cho a va b: " + this.mangchua + "<br>");
+                document.write("các số chia hết cho a : " + this.mangchua2 + "<br>");
+                document.write("các số chia hết cho b : " + this.mangchua3 + "<br>");
+                document.write("các số còn lại : " + this.mangchua4 + "<br>");
+            }
+        }
+    let x = new soNguyen(5);
+    x.khoitaomang();
+    x.inMang(2,3)
+    
+    </script>
+</body>
+</html>

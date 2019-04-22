@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script> 
+        
+        function Uscode(str) {
+            RegExp = /^[0-9]{5}(?:-[0-9]{4})?$/;
+            if(RegExp.test(str)){
+                return true;
+            }else {
+                return false;
+                }
+        }
+        var zipcode = "03201-2150"
+        alert(Uscode(zipcode));
+        var zipcode = "7892"
+        alert(Uscode(zipcode));
+    </script>
+</body>
+</html>

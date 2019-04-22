@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Tivi{
+            constructor(_channels, _volume, _status,){
+                this.channels = _channels;
+                this.volume = _volume;
+                this.status = _status;
+            };
+            Volume(){
+                if(volume===0){
+                    return alert("âm lượng đang tắc");
+                };
+            };
+            Status(){
+                if(this.status){
+                    return "tivi đang bật";
+                }else {
+                    return "tivi đang tắt";
+                };
+            };
+            Channels(){
+                
+            }
+        };
+    </script>
+</body>
+</html>
