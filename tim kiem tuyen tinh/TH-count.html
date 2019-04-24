@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function timkiem(arr,x){
+            var count = 0;
+            var index = 0;
+            var mang =[];
+
+            var mangvt =[];
+            for(var i = 0; i<arr.length;i++){
+                if(arr[i]==x) {
+                    count++;
+                    index =i; 
+                }
+            }
+            mang.push(count);
+            mang.push(index);
+
+            return mang;
+        }
+        function dispArr(arr){
+            for(var i=0;i<arr.length;i++){
+                document.write(arr[i] + " ");
+                if(i%10==9){
+                    document.write("<br>");
+                }
+            }
+        }
+        var nums =[];
+        for(var i=0;i<100;i++){
+            nums[i] = Math.floor(Math.random()*101);
+        }
+        let number =prompt("nhập một số: ");
+        var findcount = timkiem(nums,number)
+        dispArr(nums);
+        console.log(findcount)
+        document.write("<br>");
+        document.write("số lần xuất hiện của số bạn nhập là: " + findcount[0] +"<br>");
+        document.write("vị trí: " + findcount[1]);
+
+    </script>
+</body>
+</html>
