@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
+    <canvas id="myCanvas" width="650" height="480"></canvas>
     <script>
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
@@ -33,7 +33,7 @@
         var leftPressed = false;
 
         
-        var brickRowCount = 5;              // số hàng gạch:
+        var brickRowCount = 7;              // số hàng gạch:
         var brickColumnCount = 5;           // số cột gạch:   
         var brickWidth = 75;
         var brickHeight = 15;
@@ -110,7 +110,7 @@
                                 dy = -dy;
                                 b.status = 0;
                                 score++;
-                                if(score==25){
+                                if(score==35){
                                     alert("You Win!!!");
                                     document.location.reload();
                                 }
@@ -176,7 +176,7 @@
                 x += dx;
                 y += dy;
             }
-            setInterval(draw, 10);
+            setInterval(draw, 13);
 
     </script>
 </body>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <canvas id="canvas" width="500" height="400"
+        tabindex="1" style="border: 1px solid" ></canvas>
+    <script>
+        var ONE_RADIAN = Math.PI/180;
+var _360_RADIAN = 360*ONE_RADIAN;
+ 
+function Car(x,y,mapWidth, mapHeight){
+    this.img = new Image();
+    this.img.src = "car.png";
+    this.mapWidth = mapWidth;
+    this.mapHeight = mapHeight;
+ 
+    this.maxspeed = 17;
+    this.minspeed = -5;
+    this.speed = 0;
+ 
+    this.acceleration = 0.5;
+    this.friction = 0;
+    this.rotationAngle = 5*ONE_RADIAN;
+    this.angle = -90 * ONE_RADIAN;
+    this.height = 20;
+    this.width = 30;
+    this.h_height = this.height/2;
+    this.h_width = this.width/2;
+    // car's location
+    this.cx = x;
+    this.cy = y;
+ 
+    // 4 vertices of rectangle (using to detect collision)
+    this.vertices = [];
+ 
+    this.vertices.push({x: 0, y: 0});
+    this.vertices.push({x: 0, y: 0});
+    this.vertices.push({x: 0, y: 0});
+    this.vertices.push({x: 0, y: 0});
+ 
+}
+Car.prototype.draw = function(context){
+    context.save();
+    context.translate(this.cx,this.cy);
+    context.rotate(this.angle);
+    context.drawImage(this.img,-this.h_width,-this.h_height,this.width,this.height);
+    context.restore();
+}
+ 
+Car.prototype.update = function(){
+    var cos = Math.cos(this.angle);
+    var sin = Math.sin(this.angle);
+ 
+    if(this.speed!=0)
+    {
+        // move
+        this.cx += cos*this.speed;
+        this.cy += sin*this.speed;
+        if(this.cx<0)
+            this.cx = 0;
+        else if(this.cx>this.mapWidth)
+            this.cx = this.mapWidth;
+ 
+        if(this.cy<0)
+            this.cy = 0;
+        else if(this.cy>this.mapHeight)
+            this.cy = this.mapHeight;
+    }
+    // update 4 vertices based on the rotation angle and their original position
+    // top-left
+    this.vertices[0] = {
+        x: Math.floor(this.cx + cos*-this.h_width-sin*-this.h_height),
+        y: Math.floor(this.cy + sin*-this.h_width+cos*-this.h_height)
+    };
+    // top-right
+    this.vertices[1] = {
+        x: Math.floor(this.cx + cos*this.h_width-sin*-this.h_height),
+        y: Math.floor(this.cy + sin*this.h_width+cos*-this.h_height)
+    };
+    // bottom-right
+    this.vertices[2] = {
+        x: Math.floor(this.cx + cos*this.h_width-sin*this.h_height),
+        y: Math.floor(this.cy + sin*this.h_width+cos*this.h_height)
+    };
+    // left-bottom
+    this.vertices[3] = {
+        x: Math.floor(this.cx + cos*-this.h_width-sin*this.h_height),
+        y: Math.floor(this.cy + sin*-this.h_width+cos*this.h_height)
+    };
+}
+Car.prototype.handleInput = function(keyStates){
+    if(keyStates[Keys.UP_ARROW])
+    {
+        this.speed += this.acceleration;
+        if(this.speed > this.maxspeed)
+            this.speed = this.maxspeed;
+    }else if(keyStates[Keys.DOWN_ARROW])
+    {
+        this.speed -= this.acceleration;
+        if(this.speed < this.minspeed)
+            this.speed = this.minspeed;
+    }
+ 
+    if(keyStates[Keys.LEFT_ARROW])
+        this.angle -= this.rotationAngle;
+    if(keyStates[Keys.RIGHT_ARROW])
+        this.angle += this.rotationAngle;
+ 
+    // keep the angle as small  as possible
+    this.angle = this.angle % _360_RADIAN;
+ 
+    this.speed *= (1 - this.friction);
+    if(Math.abs(this.speed)<0.1)
+        this.speed = 0;
+}
+
+
+var Keys = {
+      LEFT_ARROW: 37,
+      UP_ARROW: 38,
+      RIGHT_ARROW: 39,
+      DOWN_ARROW: 40
+    };
+ 
+var ROAD_FRICTION = 0.05;
+var GRASS_FRICTION = 0.05;
+var FPS = 20;
+var AVAILABLE_KEYS =
+    [   Keys.UP_ARROW,
+        Keys.DOWN_ARROW,
+        Keys.LEFT_ARROW,
+        Keys.RIGHT_ARROW
+    ];
+ 
+var _canvas;
+var _context;
+var _car;
+ 
+var _backgroundImg = new Image();
+ 
+var _imageData;
+var _keyStates = [];
+function clear() {
+    _context.clearRect(0, 0, _canvas.width, _canvas.height);
+}
+ 
+function init() {
+ 
+    _canvas = document.getElementById("canvas");
+ 
+    _context = _canvas.getContext("2d");
+    _context.font = "16px arial";
+    _canvas.onkeydown = canvas_keyDown;
+    _canvas.onkeyup = canvas_keyUp;
+ 
+    _backgroundImg.src = "map1.png";
+    _backgroundImg.onload = function(){
+        // get the imagedata of background image
+        _context.drawImage(_backgroundImg,0,0,_canvas.width,_canvas.height);
+        _imageData = _context.getImageData(0,0,_canvas.width,_canvas.height);
+ 
+        window.setInterval(update,1000/FPS);
+    };
+ 
+    _car = new Car(_canvas.width-20,250,_canvas.width,_canvas.height);
+    _car.friction = ROAD_FRICTION;
+ 
+    //update();
+ 
+}
+ 
+function draw(){
+    clear();
+    _context.drawImage(_backgroundImg,0,0,_canvas.width,_canvas.height);
+ 
+    _car.draw(_context);
+    _context.fillStyle="red";
+ 
+    // you should place this below code in the update() function
+    var friction = ROAD_FRICTION;
+ 
+    for(var i=0;i<_car.vertices.length;i++)
+    {
+        var p = _car.vertices[i];
+ 
+        var index = Math.floor((p.x+p.y*_imageData.width)*4+3);
+ 
+        if(_imageData.data[index]!=0)
+        {
+            _context.beginPath();
+            _context.arc(p.x, p.y, 3, 0 , 2 * Math.PI, false);
+            _context.fill();
+            // increase the friction by 0.05 for each vertex (or wheel) collide with grass
+            friction += GRASS_FRICTION;
+            //break;
+        }
+    }
+ 
+    _car.friction = friction;
+}
+ 
+function update(){
+    _car.handleInput(_keyStates);
+    _car.update();
+    draw();
+}
+ 
+function canvas_keyDown(e){
+    if(AVAILABLE_KEYS.indexOf(e.keyCode)!=-1)
+        _keyStates[e.keyCode] = true;
+}
+function canvas_keyUp(e){
+    if(_keyStates[e.keyCode])
+        _keyStates[e.keyCode] = false;
+}
+ 
+window.onload = function(){
+    init();
+}
+    </script>
+</body>
+</html>
