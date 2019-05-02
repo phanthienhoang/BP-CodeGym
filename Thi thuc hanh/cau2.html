@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function tryRemoveFromArray(arr, index){
+            for(let i=0;i<arr.length;i++){
+                if(index === i){
+                  arr.splice(index,1);  
+                }
+            }
+            return arr;
+        }
+        // let index= tryRemoveFromArray(prompt("nhập vào chỉ số: "));
+        // let array =["freetuts.net", "w3schools.com", "php.net", "codeigniter.com"];
+        // console.log(tryRemoveFromArray(array, index));
+    </script>
+</body>
+</html>

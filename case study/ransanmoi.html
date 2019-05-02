@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    canvas {
+      background: rgba(0, 0, 0, 0.781);
+      border: 1px solid white;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <h2>Score: <span id="demo"></span></h2>
+    <canvas width="400" height="400" id="game"></canvas>
+  </div>
+  <script>
+    var canvas = document.getElementById("game");
+    var context = canvas.getContext("2d");
+    var grid = 16;
+    var snake = {
+      x: 160,
+      y: 160,
+      dx: grid,
+      dy: 0,
+      cells: [],
+      maxCells: 4
+    };
+    var score = 0;
+    var count = 0;
+    var foods = {
+      x: 320,
+      y: 320
+    };
+    function randomFood(min, max) {
+      return Math.floor(Math.random() * (max - min)) + min;
+    }
+    function loop() {
+      requestAnimationFrame(loop);
+      if (++count < 6) {
+        return;
+      }
+      count = 0;
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      snake.x += snake.dx;
+      snake.y += snake.dy;
+      if (snake.x < 0) {
+        snake.x = canvas.width - grid;
+      }
+      else if (snake.x >= canvas.width) {
+        snake.x = 0;
+      }
+      if (snake.y < 0) {
+        snake.y = canvas.height - grid;
+      }
+      else if (snake.y >= canvas.height) {
+        snake.y = 0;
+      }
+      snake.cells.unshift({ x: snake.x, y: snake.y });
+      if (snake.cells.length > snake.maxCells) {
+        snake.cells.pop();
+      }
+      context.fillStyle = "red";
+      context.fillRect(foods.x, foods.y, grid - 1, grid - 1);
+      context.fillStyle = "blue";
+      snake.cells.forEach(function (cell, index) {
+        context.fillRect(cell.x, cell.y, grid - 1, grid - 1);
+        if (cell.x === foods.x && cell.y === foods.y) {
+          snake.maxCells++;
+          score += 1;
+          foods.x = randomFood(0, 25) * grid;
+          foods.y = randomFood(0, 25) * grid;
+          document.getElementById("demo").innerHTML = score;
+        }
+        for (var i = index + 1; i < snake.cells.length; i++) {
+          if (cell.x === snake.cells[i].x && cell.y === snake.cells[i].y) {
+            snake.x = 160;
+            snake.y = 160;
+            snake.cells = [];
+            snake.maxCells = 4;
+            snake.dx = grid;
+            snake.dy = 0;
+            foods.x = randomFood(0, 25) * grid;
+            foods.y = randomFood(0, 25) * grid;
+            score = 0;
+            document.getElementById("demo").innerHTML = score;
+          }
+        }
+      });
+    }
+    document.addEventListener("keydown", function (back) {
+      if (back.which === 37 && snake.dx === 0) {
+        snake.dx = -grid;
+        snake.dy = 0;
+      }
+      else if (back.which === 38 && snake.dy === 0) {
+        snake.dy = -grid;
+        snake.dx = 0;
+      }
+      else if (back.which === 39 && snake.dx === 0) {
+        snake.dx = grid;
+        snake.dy = 0;
+      }
+      else if (back.which === 40 && snake.dy === 0) {
+        snake.dy = grid;
+        snake.dx = 0;
+      }
+    });
+    requestAnimationFrame(loop);
+  </script>
+</body>
+
+</html>

@@ -17,7 +17,7 @@
 </head>
 
 <body>
-    <canvas id="myCanvas" width="650" height="480"></canvas>
+    <canvas id="myCanvas" width="550" height="450"></canvas>
     <script>
         var canvas = document.getElementById("myCanvas");
         var ctx = canvas.getContext("2d");
@@ -31,9 +31,7 @@
         var paddleX = (canvas.width - paddleWidth) / 2;
         var rightPressed = false;
         var leftPressed = false;
-
-        
-        var brickRowCount = 7;              // số hàng gạch:
+        var brickRowCount = 6;              // số hàng gạch:
         var brickColumnCount = 5;           // số cột gạch:   
         var brickWidth = 75;
         var brickHeight = 15;
@@ -177,7 +175,6 @@
                 y += dy;
             }
             setInterval(draw, 13);
-
     </script>
 </body>
 
